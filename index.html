@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptCraft – Prompt Optimizer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <div class="logo">
+        <span class="logo-mark">⚡</span>
+        <h1>PromptCraft</h1>
+      </div>
+      <p class="tagline">Turn weak prompts into high-signal ones</p>
+      <div class="header-actions">
+        <button id="theme-toggle" class="btn-icon" title="Toggle theme">☀️</button>
+        <button id="history-toggle" class="btn-icon" title="History">🕒</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="input-section">
+        <label for="prompt-input">Original Prompt</label>
+        <textarea id="prompt-input" placeholder="Paste a weak or vague prompt here..." rows="6"></textarea>
+
+        <div class="api-key-row">
+          <input type="password" id="api-key" placeholder="Groq API key (saved locally)" />
+          <small>Free tier · stored only in your browser</small>
+        </div>
+
+        <div class="controls">
+          <select id="model-select">
+            <option value="openai/gpt-oss-20b">gpt-oss-20b (recommended)</option>
+            <option value="openai/gpt-oss-120b">gpt-oss-120b</option>
+            <option value="qwen/qwen3.8-27b">qwen3.8-27b</option>
+          </select>
+          <span id="original-tokens">~0 tokens</span>
+          <button id="optimize-btn" class="btn-primary">Optimize Prompt</button>
+        </div>
+      </section>
+
+      <section class="results" id="results" hidden>
+        <div class="results-header">
+          <h2>Optimized Versions</h2>
+          <div>
+            <button id="copy-all" class="btn-ghost">Copy All</button>
+            <button id="clear-btn" class="btn-ghost">Clear</button>
+          </div>
+        </div>
+
+        <div class="cards">
+          <article class="card" data-type="zero-shot">
+            <header>
+              <h3>Zero-shot</h3>
+              <span class="badge">Direct</span>
+              <span class="tokens" id="zero-tokens"></span>
+            </header>
+            <pre id="zero-output"></pre>
+            <button class="copy-btn" data-target="zero-output">Copy</button>
+          </article>
+
+          <article class="card" data-type="few-shot">
+            <header>
+              <h3>Few-shot</h3>
+              <span class="badge">Examples</span>
+              <span class="tokens" id="few-tokens"></span>
+            </header>
+            <pre id="few-output"></pre>
+            <button class="copy-btn" data-target="few-output">Copy</button>
+          </article>
+
+          <article class="card" data-type="cot">
+            <header>
+              <h3>Chain-of-Thought</h3>
+              <span class="badge">Reasoning</span>
+              <span class="tokens" id="cot-tokens"></span>
+            </header>
+            <pre id="cot-output"></pre>
+            <button class="copy-btn" data-target="cot-output">Copy</button>
+          </article>
+        </div>
+      </section>
+
+      <aside class="history" id="history" hidden>
+        <div class="history-header">
+          <h3>Recent Optimizations</h3>
+          <button id="clear-history" class="btn-ghost">Clear History</button>
+        </div>
+        <div id="history-list"></div>
+      </aside>
+    </main>
+
+    <footer>
+      <p>Built for portfolio · Prompt engineering demo</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
