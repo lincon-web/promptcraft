@@ -16,7 +16,11 @@ const historyPanel = document.getElementById('history');
 const historyList = document.getElementById('history-list');
 const clearHistoryBtn = document.getElementById('clear-history');
 
-const API_BASE = 'http://127.0.0.1:8000';
+const API_BASE = window.location.hostname === '127.0.0.1' ||
+                 window.location.hostname === 'localhost'
+    ? 'http://127.0.0.1:8000'
+    : 'https://promptcraft-api-m34o.onrender.com';
+    
 function getAIConfig() {
   return {
     provider: providerSelect.value,
