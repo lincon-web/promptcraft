@@ -4,86 +4,501 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PromptCraft – Prompt Optimizer</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <div class="app">
-    <header class="header">
-      <div class="logo">
-        <span class="logo-mark">⚡</span>
+  
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <!-- BRAND -->
+    <div class="sidebar-brand">
+      <div class="sidebar-logo">⚡</div>
+      <div class="sidebar-brand-text">
         <h1>PromptCraft</h1>
+        <span>AI PROMPT STUDIO</span>
       </div>
-      <p class="tagline">Turn weak prompts into high-signal ones</p>
-      <div class="header-actions">
-        <button id="theme-toggle" class="btn-icon" title="Toggle theme">☀️</button>
-        <button id="history-toggle" class="btn-icon" title="History">🕒</button>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- WORKSPACE NAVIGATION -->
+    <div class="sidebar-section-label">WORKSPACE</div>
+
+    <nav class="mode-navigation">
+
+      <button
+        type="button"
+        class="mode-tab active"
+        id="quick-mode-btn"
+        data-mode="quick"
+      >
+        <span class="mode-icon">⚡</span>
+        <span>Quick Optimize</span>
+        <span class="mode-label">Simple</span>
+      </button>
+
+      <button
+        type="button"
+        class="mode-tab"
+        id="advanced-mode-btn"
+        data-mode="advanced"
+      >
+        <span class="mode-icon">⚙</span>
+        <span>Advanced Optimizer</span>
+        <span class="mode-label">BYOK</span>
+      </button>
+
+    </nav>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- SIDEBAR TOOLS -->
+    <div class="sidebar-section-label">PREFERENCES</div>
+
+    <div class="sidebar-tools">
+
+      <button
+        type="button"
+        id="history-toggle"
+        class="sidebar-action"
+      >
+        <span>🕒</span>
+        <span>History</span>
+      </button>
+
+      <a href="about.html" class="sidebar-action">
+    <span>ⓘ</span>
+    <span>About PromptCraft</span>
+</a>
+
+      <button
+        type="button"
+        id="theme-toggle"
+        class="sidebar-action"
+        title="Toggle theme"
+      >
+        <span>☀️</span>
+        <span>Appearance</span>
+      </button>
+
+    </div>
+
+    <div class="sidebar-spacer"></div>
+
+    <!-- SIDEBAR FOOTER -->
+    <div class="sidebar-footer">
+      <div class="sidebar-status-dot"></div>
+      <div>
+        <strong>AI Workspace</strong>
+        <span>Ready to create</span>
       </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN APPLICATION -->
+  <div class="app-content">
+
+    <!-- TOP HEADER -->
+    <header class="header">
+
+      <button
+    type="button"
+    id="sidebar-toggle"
+    class="sidebar-toggle"
+    title="Toggle Sidebar"
+    aria-label="Toggle Sidebar"
+    aria-expanded="true"
+>
+    <span>☰</span>
+</button>
+
+      <div class="header-center">
+        <span class="header-tag">
+          <span class="tag-dot"></span>
+          PROMPT ENGINEERING STUDIO
+        </span>
+
+        <p class="tagline">
+          Craft precision. Unlock AI's potential.
+        </p>
+      </div>
+
     </header>
 
     <main>
+
+
+<!-- QUICK OPTIMIZE WORKSPACE -->
+
+<section id="quick-workspace" class="quick-workspace">
+
+    <div class="quick-heading">
+        <span class="section-eyebrow">FAST PROMPT ENHANCEMENT</span>
+
+        <h2>Make every prompt count.</h2>
+
+        <p>
+            Transform your idea into a clear, effective AI prompt.
+            No API key or technical setup required.
+        </p>
+    </div>
+
+    <div class="quick-input-card">
+
+        <label for="quick-prompt-input">
+            What would you like to improve?
+        </label>
+
+        <textarea
+            id="quick-prompt-input"
+            rows="7"
+            placeholder="Enter your prompt here..."
+        ></textarea>
+
+        <div class="quick-controls">
+
+            <span id="quick-token-count">~0 tokens</span>
+
+            <button
+                type="button"
+                id="quick-optimize-btn"
+                class="btn-primary"
+            >
+                <span>⚡</span>
+                Optimize Prompt
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- QUICK RESULT -->
+
+    <section id="quick-result" class="quick-result" hidden>
+
+        <div class="section-heading">
+            <div>
+                <span class="section-eyebrow">YOUR OPTIMIZED PROMPT</span>
+                <h2>Final Best Prompt</h2>
+                <p>Refined, clear and ready to use.</p>
+            </div>
+
+            <span class="best-badge">Ready to use</span>
+        </div>
+
+        <pre id="quick-output"></pre>
+
+        <div class="best-footer">
+
+            <span id="quick-result-tokens" class="tokens"></span>
+
+            <button
+                type="button"
+                id="quick-copy-btn"
+                class="copy-btn"
+            >
+                Copy Prompt
+            </button>
+
+        </div>
+
+    </section>
+
+</section>
+
+<!-- ADVANCED OPTIMIZER WORKSPACE -->
+
+<div id="advanced-workspace" hidden>
+
       <section class="input-section">
         <label for="prompt-input">Original Prompt</label>
-        <textarea id="prompt-input" placeholder="Paste a weak or vague prompt here..." rows="6"></textarea>
+        <textarea id="prompt-input" placeholder="How is artificial intelligence changing the way people work and learn?..." rows="6"></textarea>
 
-        <div class="api-key-row">
-          <input type="password" id="api-key" placeholder="Groq API key (saved locally)" />
-          <small>Free tier · stored only in your browser</small>
-        </div>
+        
+<!-- AI PROVIDER CONFIGURATION -->
 
-        <div class="controls">
-          <select id="model-select">
-            <option value="openai/gpt-oss-20b">gpt-oss-20b (recommended)</option>
-            <option value="openai/gpt-oss-120b">gpt-oss-120b</option>
-            <option value="qwen/qwen3.8-27b">qwen3.8-27b</option>
-          </select>
-          <span id="original-tokens">~0 tokens</span>
-          <button id="optimize-btn" class="btn-primary">Optimize Prompt</button>
-        </div>
+<div class="provider-config">
+
+  <div class="provider-row">
+
+    <div class="provider-field">
+      <label for="provider-select">AI Provider</label>
+
+      <select id="provider-select">
+        <option value="groq">Groq</option>
+        <option value="openai">OpenAI</option>
+        <option value="gemini">Google Gemini</option>
+        <option value="openrouter">OpenRouter</option>
+      </select>
+    </div>
+
+    <div class="provider-field">
+      <label for="model-select">Model ID</label>
+
+      <input
+        type="text"
+        id="model-select"
+        placeholder="Enter model ID"
+        autocomplete="off"
+      />
+    </div>
+
+  </div>
+
+  <div class="api-key-field">
+
+    <label for="api-key">API Key</label>
+
+    <div class="api-key-input">
+      <input
+        type="password"
+        id="api-key"
+        placeholder="Paste your provider API key"
+        autocomplete="off"
+      />
+
+      <button
+        type="button"
+        id="toggle-api-key"
+        class="btn-icon"
+        title="Show or hide API key"
+      >
+        👁️
+      </button>
+    </div>
+
+    <small>
+      Your key is used for API requests and is not saved by the backend.
+    </small>
+
+  </div>
+
+  <div class="connection-row">
+
+    <button
+      type="button"
+      id="test-connection-btn"
+      class="btn-ghost"
+    >
+      Test Connection
+    </button>
+
+    <span id="connection-status">
+      Not connected
+    </span>
+
+  </div>
+
+</div>
+
+<div class="controls">
+  <span id="original-tokens">~0 tokens</span>
+  <button id="optimize-btn" class="btn-primary">
+    Optimize Prompt
+  </button>
+</div>
+
       </section>
 
-      <section class="results" id="results" hidden>
-        <div class="results-header">
-          <h2>Optimized Versions</h2>
+
+<!-- OPTIMIZATION RESULTS -->
+
+<section class="results" id="results" hidden>
+
+  <!-- ORIGINAL PROMPT -->
+
+  <div class="result-original">
+
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow">YOUR INPUT</span>
+        <h2>Original Prompt</h2>
+      </div>
+
+      <span class="result-number">01</span>
+    </div>
+
+    <pre id="original-output"></pre>
+
+  </div>
+
+
+  <!-- OPTIMIZED VERSIONS -->
+
+  <div class="optimized-section">
+
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow">PROMPT ENHANCEMENT</span>
+        <h2>Optimized Versions</h2>
+        <p>Compare three approaches to improving your prompt.</p>
+      </div>
+
+      <span class="optimization-count">3 Strategies</span>
+    </div>
+
+
+    <!-- ZERO SHOT -->
+
+    <article class="optimized-card">
+
+      <div class="optimized-card-header">
+
+        <div class="strategy-title">
+          <span class="strategy-number">01</span>
+
           <div>
-            <button id="copy-all" class="btn-ghost">Copy All</button>
-            <button id="clear-btn" class="btn-ghost">Clear</button>
+            <h3>Zero-shot</h3>
+            <span class="strategy-description">Direct instructions</span>
           </div>
         </div>
 
-        <div class="cards">
-          <article class="card" data-type="zero-shot">
-            <header>
-              <h3>Zero-shot</h3>
-              <span class="badge">Direct</span>
-              <span class="tokens" id="zero-tokens"></span>
-            </header>
-            <pre id="zero-output"></pre>
-            <button class="copy-btn" data-target="zero-output">Copy</button>
-          </article>
+        <span class="strategy-badge">Direct</span>
 
-          <article class="card" data-type="few-shot">
-            <header>
-              <h3>Few-shot</h3>
-              <span class="badge">Examples</span>
-              <span class="tokens" id="few-tokens"></span>
-            </header>
-            <pre id="few-output"></pre>
-            <button class="copy-btn" data-target="few-output">Copy</button>
-          </article>
+      </div>
 
-          <article class="card" data-type="cot">
-            <header>
-              <h3>Chain-of-Thought</h3>
-              <span class="badge">Reasoning</span>
-              <span class="tokens" id="cot-tokens"></span>
-            </header>
-            <pre id="cot-output"></pre>
-            <button class="copy-btn" data-target="cot-output">Copy</button>
-          </article>
+      <pre id="zero-output"></pre>
+
+      <div class="improvement-box">
+  <h4>What improved</h4>
+  <div id="zero-improvements" class="improvements-list"></div>
+</div>
+
+
+      <div class="optimized-card-footer">
+        <span class="tokens" id="zero-tokens"></span>
+        <button class="copy-btn" data-target="zero-output">
+          Copy Prompt
+        </button>
+      </div>
+
+    </article>
+
+
+    <!-- FEW SHOT -->
+
+    <article class="optimized-card">
+
+      <div class="optimized-card-header">
+
+        <div class="strategy-title">
+          <span class="strategy-number">02</span>
+
+          <div>
+            <h3>Few-shot</h3>
+            <span class="strategy-description">Example-guided instructions</span>
+          </div>
         </div>
-      </section>
+
+        <span class="strategy-badge">Examples</span>
+
+      </div>
+
+      <pre id="few-output"></pre>
+
+      <div class="improvement-box">
+  <h4>What improved</h4>
+  <div id="few-improvements" class="improvements-list"></div>
+</div>
+
+      <div class="optimized-card-footer">
+        <span class="tokens" id="few-tokens"></span>
+        <button class="copy-btn" data-target="few-output">
+          Copy Prompt
+        </button>
+      </div>
+
+    </article>
+
+
+    <!-- REASONING GUIDED -->
+
+    <article class="optimized-card">
+
+      <div class="optimized-card-header">
+
+        <div class="strategy-title">
+          <span class="strategy-number">03</span>
+
+          <div>
+            <h3>Reasoning-guided</h3>
+            <span class="strategy-description">Structured instructions</span>
+          </div>
+        </div>
+
+        <span class="strategy-badge">Reasoning</span>
+
+      </div>
+
+      <pre id="cot-output"></pre>
+
+      <div class="improvement-box">
+  <h4>What improved</h4>
+  <div id="cot-improvements" class="improvements-list"></div>
+</div>
+      <div class="optimized-card-footer">
+        <span class="tokens" id="cot-tokens"></span>
+        <button class="copy-btn" data-target="cot-output">
+          Copy Prompt
+        </button>
+      </div>
+
+    </article>
+
+  </div>
+
+
+  <!-- FINAL BEST PROMPT -->
+
+  <section class="best-section">
+
+    <div class="section-heading">
+      <div>
+        <span class="section-eyebrow">FINAL RECOMMENDATION</span>
+        <h2>Final Best Prompt</h2>
+        <p>The strongest combined version, ready to use.</p>
+      </div>
+
+      <span class="best-badge">Recommended</span>
+    </div>
+
+    <pre id="best-output"></pre>
+
+    <div class="best-footer">
+
+      <span class="tokens" id="best-tokens"></span>
+
+      <button class="copy-btn" data-target="best-output">
+        Copy Final Prompt
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- RESULTS ACTIONS -->
+
+  <div class="results-actions">
+    <button id="copy-all" class="btn-ghost">
+      Copy All Prompts
+    </button>
+
+    <button id="clear-btn" class="btn-ghost">
+      Start New Optimization
+    </button>
+  </div>
+
+</section>
+
 
       <aside class="history" id="history" hidden>
         <div class="history-header">
@@ -92,13 +507,48 @@
         </div>
         <div id="history-list"></div>
       </aside>
+      </div>
     </main>
 
-    <footer>
-      <p>Built for portfolio · Prompt engineering demo</p>
-    </footer>
+    
+<footer class="footer">
+
+  <div class="footer-main">
+
+    <div class="footer-brand">
+      <div class="footer-brand-name">
+        <span class="footer-logo">⚡</span>
+        <span>PromptCraft</span>
+      </div>
+
+      <span class="footer-copyright">
+        © 2026 PromptCraft. All rights reserved.
+      </span>
+    </div>
+
+    <div class="footer-message">
+      <span class="footer-eyebrow">BUILT FOR BETTER PROMPTS</span>
+      <p>Prompt precisely.</p>
+    </div>
+
   </div>
 
-  <script src="script.js"></script>
+  <div class="footer-bottom">
+    <span class="footer-status">
+      <span class="status-dot"></span>
+      AI-powered prompt engineering
+    </span>
+  </div>
+
+</footer>
+
+
+    </div> <!-- app-content -->
+
+</div> <!-- app-shell -->
+
+
+
+<script src="script.js"></script>
 </body>
 </html>
